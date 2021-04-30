@@ -51,31 +51,27 @@ int main()
     {
         sf::Event event;
 
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-        {
-            _isGameNotStarted = false;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            p->playerMoveR(_isGameNotStarted);
-            
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            p->playerMoveL(_isGameNotStarted);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-        {
-            if(_isGameFinished == true)
-                resetLevel();
-        }
-
-
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            {
+                _isGameNotStarted = false;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            {
+                p->playerMoveR(_isGameNotStarted);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            {
+                p->playerMoveL(_isGameNotStarted);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+            {
+                if (_isGameFinished == true)
+                    resetLevel();
+            }
         }
 
 
@@ -83,9 +79,7 @@ int main()
         gecenSure += saat.restart();
         if (gecenSure.asSeconds() >= cerceveSuresi)
         {
-            window.clear();
-            window.draw(p->racket);
-            window.draw(p->ball);
+            p->racket.setPosition(p->racketX, p->racketY);
 
             if (!_isGameNotStarted) {
                 p->ballX += g->ballArtisX;
@@ -94,9 +88,12 @@ int main()
                 g->ballControl();
             }
 
-           
+            window.clear();
+            window.draw(p->racket);
+            window.draw(p->ball);
 
-            std::cout << "x: "<< p->ballX<<" y: "<<p->ballY<<" artisX: "<<g->ballArtisX<<std::endl;
+            std::cout << p->racketX << std::endl;
+            //std::cout << "x: "<< p->ballX<<" y: "<<p->ballY<<" artisX: "<<g->ballArtisX<<std::endl;
             
             for (int i = 0; i < 26;)
             {
@@ -119,6 +116,7 @@ int main()
                 }
             }
             window.display();
+            gecenSure -= gecenSure;
         }
 
 

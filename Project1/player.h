@@ -45,24 +45,22 @@ public:
 	void playerMoveR(bool x)
 	{
 		if (racketX < 460) {
-			racketX += 1;
+			racketX += 5;
 			if (x == true)
 			{
-				ballX += 1;
+				ballX += 5;
 			}
-			racket.setPosition(racketX, racketY);
 			ball.setPosition(ballX, ballY);
 		}
 	}
 	void playerMoveL(bool x)
 	{
 		if (racketX > 40){
-			racketX -= 1;
+			racketX -= 5;
 			if (x == true)
 			{
-				ballX -= 1;
+				ballX -= 5;
 			}
-			racket.setPosition(racketX, racketY);
 			ball.setPosition(ballX, ballY);
 		}
 			

@@ -49,8 +49,7 @@ public:
 				rand_uret = rand() % 5;
 				brickList[i][j].type = rand_uret;
 				brickList[i][j].status = 0;
-				sf::Texture rand_texture = brickTextures[rand_uret];
-				brickList[i][j].item.setTexture(rand_texture);
+				brickList[i][j].item.setTexture(brickTextures[rand_uret]);
 				brickList[i][j].item.setPosition(brick_x, brick_y);
 				brickList[i][j].item.setScale(scale, scale);
 				brick_x += round((width * scale) + space);

@@ -10,7 +10,7 @@ public:
     player *p;
     brick *b;
     cerceve* c;
-    float ballArtisX = 1, ballArtisY = 1;
+    float ballArtisX = 3, ballArtisY = 3;
     float lastX = 0;
 
 
@@ -21,6 +21,7 @@ public:
 	}
 
     void ballControl() {
+        int r = rand() % 2;
         // Sað duvar kontrol
         if (p->ball.getPosition().x >= 588.4 - (371 * 0.07)) {
             ballArtisX *= -1;
@@ -48,8 +49,9 @@ public:
         
         // Raket kontrol
         if (p->ball.getGlobalBounds().intersects(p->racket.getGlobalBounds())) {
-            // Raketin Solu
-            ballArtisX *= -1;
+            if (r == 0) {
+                ballArtisX *= -1;
+            }
             lastX = p->ball.getPosition().x;
             ballArtisY *= -1;
         }
@@ -60,14 +62,14 @@ public:
                 if (b->brickList[i][j].status != 2)
                     if (p->ball.getGlobalBounds().intersects(b->brickList[i][j].item.getGlobalBounds())) {
                         // Brick Solu
-                        if (p->ball.getPosition().x <= b->brickList[i][j].item.getPosition().x + (233 * 0.3 / 2)) {
+                        if (p->ball.getPosition().x <= b->brickList[i][j].item.getPosition().x + (233 * 0.35 / 2)) {
                             // Soldan geliyorsa
                             if (lastX <= p->ball.getPosition().x) {
                                 ballArtisX *= -1;
                             }
                         }
                         // Brick Saðý
-                        if (p->ball.getPosition().x >= b->brickList[i][j].item.getPosition().x + (233 * 0.3 / 2)) {
+                        if (p->ball.getPosition().x >= b->brickList[i][j].item.getPosition().x + (233 * 0.35 / 2)) {
                             // Saðdan geliyorsa
                             if (lastX >= p->ball.getPosition().x) {
                                 ballArtisX *= -1;
