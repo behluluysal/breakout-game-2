@@ -99,8 +99,8 @@ int main()
             {
                 for (int j = 0; j < 6; j++)
                 {
-                    if (!b->bricks[i][j].destroyed)
-                        window.draw(b->bricks[i][j].item);
+                    if (b->brickList[i][j].status != 2)
+                        window.draw(b->brickList[i][j].item);
                 }
             }
             window.display();
