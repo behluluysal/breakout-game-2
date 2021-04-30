@@ -39,7 +39,7 @@ int main()
 
     srand(time(0));
     
-    sf::RenderWindow window(sf::VideoMode(frameWidth, frameHeight), "Breakout! If you can haha");
+    sf::RenderWindow window(sf::VideoMode(frameWidth, frameHeight), "Breakout!");
 
     resetLevel();
     
@@ -88,8 +88,7 @@ int main()
             window.draw(p->raket);
             window.draw(p->ball);
 
-            std::cout << p->raket_x << std::endl;
-            //std::cout << "x: "<< p->ball_x<<" y: "<<p->ball_y<<" artisX: "<<g->ball_incX<<std::endl;
+           
             
             for (int i = 0; i < 26;)
             {
