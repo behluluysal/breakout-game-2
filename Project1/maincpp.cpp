@@ -97,7 +97,7 @@ int main()
             }
             for(int i = 0; i < 4; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 6; j++)
                 {
                     if (!b->bricks[i][j].destroyed)
                         window.draw(b->bricks[i][j].item);

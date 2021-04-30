@@ -30,21 +30,21 @@ public:
 		brickBrokenTextures[3].loadFromFile("resimler/Bricks/brick_violet_small_cracked.png", { 140, 177, 233, 104 });
 		brickBrokenTextures[4].loadFromFile("resimler/Bricks/brick_yellow_small_cracked.png", { 140, 177, 233, 104 });
 	
-		int brickX = 36, brickY = 50;
+		int brickX = 56, brickY = 80;
 		for (int i = 0; i < 4; ++i)
 		{
-			brickX = 36;
+			brickX = 56;
 			for (int j = 0; j < 6; ++j) {
 				int random = rand() % 5;
 				bricks[i][j].index = random;
 				bricks[i][j].broken = false;
 				bricks[i][j].destroyed = false;
 				bricks[i][j].item.setTexture(brickTextures[random]);
-				bricks[i][j].item.setScale(0.3f, 0.3f);
+				bricks[i][j].item.setScale(0.35f, 0.35f);
 				bricks[i][j].item.setPosition(brickX, brickY);
-				brickX += round((232 * 0.3f) + 1);
+				brickX += round((232 * 0.35f) + 5);
 			}
-			brickY += round((104 * 0.3f) + 1);
+			brickY += round((104 * 0.35f) + 5);
 		}
 	}
 };
