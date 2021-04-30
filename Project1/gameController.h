@@ -10,7 +10,7 @@ public:
     player *p;
     brick *b;
     cerceve* c;
-    float ballArtisX = 3, ballArtisY = 3;
+    float ball_incX = 3, ball_incY = 3;
     float lastX = 0;
 
 
@@ -20,70 +20,58 @@ public:
         this->c = cl;
 	}
 
-    void ballControl() {
+    void ballControl(bool *_isGameFinished) {
         int r = rand() % 2;
-        // Sað duvar kontrol
         if (p->ball.getPosition().x >= 588.4 - (371 * 0.07)) {
-            ballArtisX *= -1;
+            ball_incX *= -1;
             lastX = p->ball.getPosition().x;
         }
-        // Sol duvar kontrol
         if (p->ball.getPosition().x <= 34.6) {
-            ballArtisX *= -1;
+            ball_incX *= -1;
             lastX = p->ball.getPosition().x;
         }
-        // Üst duvar kontrol
         if (p->ball.getPosition().y <= 34.6) {
-            ballArtisY *= -1;
+            ball_incY *= -1;
             lastX = p->ball.getPosition().x;
         }
-        // Alt duvar kontrol
         if (p->ball.getPosition().y >= 865.2 - ((371 * 0.07))) {
-            //start = false;
-            ballArtisX *= -1;
-            //ballArtisY = 0;
+            *_isGameFinished = true;
+            ball_incX = 0;
+            ball_incY = 0;
             lastX = p->ball.getPosition().x;
         }
         
-        
-        
-        // Raket kontrol
-        if (p->ball.getGlobalBounds().intersects(p->racket.getGlobalBounds())) {
+        if (p->ball.getGlobalBounds().intersects(p->raket.getGlobalBounds())) {
             if (r == 0) {
-                ballArtisX *= -1;
+                ball_incX *= -1;
             }
             lastX = p->ball.getPosition().x;
-            ballArtisY *= -1;
+            ball_incY *= -1;
         }
 
-        // Brick kontrol
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 6; ++j) {
                 if (b->brickList[i][j].status != 2)
                     if (p->ball.getGlobalBounds().intersects(b->brickList[i][j].item.getGlobalBounds())) {
-                        // Brick Solu
                         if (p->ball.getPosition().x <= b->brickList[i][j].item.getPosition().x + (233 * 0.35 / 2)) {
-                            // Soldan geliyorsa
                             if (lastX <= p->ball.getPosition().x) {
-                                ballArtisX *= -1;
+                                ball_incX *= -1;
                             }
                         }
-                        // Brick Saðý
                         if (p->ball.getPosition().x >= b->brickList[i][j].item.getPosition().x + (233 * 0.35 / 2)) {
-                            // Saðdan geliyorsa
                             if (lastX >= p->ball.getPosition().x) {
-                                ballArtisX *= -1;
+                                ball_incX *= -1;
                             }
                         }
                         lastX = p->ball.getPosition().x;
                         if (b->brickList[i][j].status != 1) {
-                            b->brickList[i][j].item.setTexture(b->brickBrokenTextures[b->brickList[i][j].type]);
+                            b->brickList[i][j].item.setTexture(b->textures_brick_broken[b->brickList[i][j].type]);
                             b->brickList[i][j].status = 1;
                         }
                         else {
                             b->brickList[i][j].status = 2;
                         }
-                        ballArtisY *= -1;
+                        ball_incY *= -1;
                         return;
                     }
             }

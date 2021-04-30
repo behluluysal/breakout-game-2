@@ -5,9 +5,9 @@
 #include "gameController.h"
 #include <iostream>
 
-float _width = 623.8f; 
-float _height = 899.8f;
-float cerceveSuresi = 1.0f / 60.0f;
+float frameWidth = 623.8f; 
+float frameHeight = 899.8f;
+float FPS = 1.0f / 60.0f;
 
 cerceve* c;
 player* p;
@@ -16,7 +16,6 @@ gameController* g;
 bool _isGameNotStarted;
 bool _isGameFinished;
 brick brickList[4][6];
-
 
 void resetLevel()
 {
@@ -35,18 +34,15 @@ void resetLevel()
 
 int main()
 {
-    sf::Clock saat;
-    sf::Time gecenSure;
+    sf::Clock clk;
+    sf::Time passedTime;
 
     srand(time(0));
     
-    sf::RenderWindow window(sf::VideoMode(_width, _height), "Breakout! If you can haha");
-
-    
+    sf::RenderWindow window(sf::VideoMode(frameWidth, frameHeight), "Breakout! If you can haha");
 
     resetLevel();
     
-
     while (window.isOpen())
     {
         sf::Event event;
@@ -76,24 +72,24 @@ int main()
 
 
 
-        gecenSure += saat.restart();
-        if (gecenSure.asSeconds() >= cerceveSuresi)
+        passedTime += clk.restart();
+        if (passedTime.asSeconds() >= FPS)
         {
-            p->racket.setPosition(p->racketX, p->racketY);
+            p->raket.setPosition(p->raket_x, p->raket_y);
 
             if (!_isGameNotStarted) {
-                p->ballX += g->ballArtisX;
-                p->ballY -= g->ballArtisY;
-                p->ball.setPosition(p->ballX, p->ballY);
-                g->ballControl();
+                p->ball_x += g->ball_incX;
+                p->ball_y -= g->ball_incY;
+                p->ball.setPosition(p->ball_x, p->ball_y);
+                g->ballControl(&_isGameFinished);
             }
 
             window.clear();
-            window.draw(p->racket);
+            window.draw(p->raket);
             window.draw(p->ball);
 
-            std::cout << p->racketX << std::endl;
-            //std::cout << "x: "<< p->ballX<<" y: "<<p->ballY<<" artisX: "<<g->ballArtisX<<std::endl;
+            std::cout << p->raket_x << std::endl;
+            //std::cout << "x: "<< p->ball_x<<" y: "<<p->ball_y<<" artisX: "<<g->ball_incX<<std::endl;
             
             for (int i = 0; i < 26;)
             {
@@ -116,7 +112,7 @@ int main()
                 }
             }
             window.display();
-            gecenSure -= gecenSure;
+            passedTime -= passedTime;
         }
 
 

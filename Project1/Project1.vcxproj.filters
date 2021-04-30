@@ -15,11 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="maincpp.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="cerceve.h">
       <Filter>Üst Bilgi Dosyaları</Filter>
     </ClInclude>
@@ -35,5 +30,10 @@
     <ClInclude Include="gameController.h">
       <Filter>Üst Bilgi Dosyaları</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="program.cpp">
+      <Filter>Kaynak Dosyalar</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

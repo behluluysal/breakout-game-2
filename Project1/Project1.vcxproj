@@ -148,7 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="maincpp.cpp" />
+    <ClCompile Include="program.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="brick.h" />
