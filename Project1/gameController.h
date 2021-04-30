@@ -57,29 +57,29 @@ public:
         // Brick kontrol
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 6; ++j) {
-                if (!b->bricks[i][j].destroyed)
-                    if (p->ball.getGlobalBounds().intersects(b->bricks[i][j].item.getGlobalBounds())) {
+                if (b->brickList[i][j].status != 2)
+                    if (p->ball.getGlobalBounds().intersects(b->brickList[i][j].item.getGlobalBounds())) {
                         // Brick Solu
-                        if (p->ball.getPosition().x <= b->bricks[i][j].item.getPosition().x + (233 * 0.3 / 2)) {
+                        if (p->ball.getPosition().x <= b->brickList[i][j].item.getPosition().x + (233 * 0.3 / 2)) {
                             // Soldan geliyorsa
                             if (lastX <= p->ball.getPosition().x) {
                                 ballArtisX *= -1;
                             }
                         }
                         // Brick Saðý
-                        if (p->ball.getPosition().x >= b->bricks[i][j].item.getPosition().x + (233 * 0.3 / 2)) {
+                        if (p->ball.getPosition().x >= b->brickList[i][j].item.getPosition().x + (233 * 0.3 / 2)) {
                             // Saðdan geliyorsa
                             if (lastX >= p->ball.getPosition().x) {
                                 ballArtisX *= -1;
                             }
                         }
                         lastX = p->ball.getPosition().x;
-                        if (!b->bricks[i][j].broken) {
-                            b->bricks[i][j].item.setTexture(b->brickBrokenTextures[b->bricks[i][j].index]);
-                            b->bricks[i][j].broken = true;
+                        if (b->brickList[i][j].status != 1) {
+                            b->brickList[i][j].item.setTexture(b->brickBrokenTextures[b->brickList[i][j].type]);
+                            b->brickList[i][j].status = 1;
                         }
                         else {
-                            b->bricks[i][j].destroyed = true;
+                            b->brickList[i][j].status = 2;
                         }
                         ballArtisY *= -1;
                         return;
