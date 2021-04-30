@@ -1,24 +1,34 @@
 #pragma once
 #include <SFML/Graphics/Sprite.hpp>
 
+sf::Texture brickTextures[5];
+sf::Texture brickBrokenTextures[5];
+
 class brick
 {
+
 private:
-	static sf::Texture brickTextures[5];
-	static sf::Texture brickBrokenTextures[5];
+
 	sf::Sprite sprite;
+
+protected:
+
+
+public:
+
 	int type;
 	int status; // 0: Saðlam  1: Kýrýlmýþ  2: Yok edilmiþ
 
-public:
+
+
 	brick() {
 		type = 0;
 		status = 0;
 	}
 
 	brick(int type, int status, int x, int y) {
-		type = 0;
-		status = 0;
+		this->type = type;
+		this->status = status;
 		brickTextures[0].loadFromFile("resimler/Bricks/brick_blue_small.png", { 140, 177, 233, 104 });
 		brickTextures[1].loadFromFile("resimler/Bricks/brick_green_small.png", { 140, 177, 233, 104 });
 		brickTextures[2].loadFromFile("resimler/Bricks/brick_pink_small.png", { 140, 177, 233, 104 });
@@ -50,6 +60,9 @@ public:
 
 	int getStatus() {
 		return status;
+	}
+	sf::Sprite getSprite() {
+		return sprite;
 	}
 };
 
