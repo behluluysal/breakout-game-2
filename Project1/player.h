@@ -8,8 +8,8 @@ public:
 	float racketY;
 
 	sf::Sprite ball;
-	float ballX = (((465 * 0.2f) - (371 * 0.05f)) / 2) + 203;
-	float ballY = 655 - (371 * 0.05f);
+	float ballX ;
+	float ballY ;
 
 	sf::Texture racketTextures[5];
 	sf::Texture ballTextures[6];

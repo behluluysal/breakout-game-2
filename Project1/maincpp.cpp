@@ -2,7 +2,8 @@
 #include "cerceve.h"
 #include "player.h"
 #include "brick.h"
-
+#include "gameController.h"
+#include <iostream>
 
 float _width = 623.8f; 
 float _height = 899.8f;
@@ -11,6 +12,7 @@ float cerceveSuresi = 1.0f / 60.0f;
 cerceve* c;
 player* p;
 brick* b;
+gameController* g;
 bool _isGameNotStarted;
 bool _isGameFinished;
 brick brickList[4][6];
@@ -21,6 +23,7 @@ void resetLevel()
     c = new cerceve();
     p = new player();
     b = new brick();
+    g = new gameController(p,b,c);
     _isGameNotStarted = true;
     _isGameFinished = false;
 
@@ -83,6 +86,18 @@ int main()
             window.clear();
             window.draw(p->racket);
             window.draw(p->ball);
+
+            if (!_isGameNotStarted) {
+                p->ballX += g->ballArtisX;
+                p->ballY -= g->ballArtisY;
+                p->ball.setPosition(p->ballX, p->ballY);
+                g->ballControl();
+            }
+
+           
+
+            std::cout << "x: "<< p->ballX<<" y: "<<p->ballY<<" artisX: "<<g->ballArtisX<<std::endl;
+            
             for (int i = 0; i < 26;)
             {
                 window.draw(c->verticalWalls[0][i]);
