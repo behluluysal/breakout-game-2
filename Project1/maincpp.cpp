@@ -1,12 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include "cerceve.h"
 #include "player.h"
+#include "brick.h"
 
 
 float _width = 623.8f; 
 float _height = 899.8f;
 float cerceveSuresi = 1.0f / 60.0f;
 
+<<<<<<< HEAD
 cerceve* c;
 player* p;
 bool _isGameNotStarted;
@@ -18,6 +20,9 @@ void resetLevel()
     _isGameNotStarted = true;
     _isGameFinished = false;
 }
+=======
+brick brickList[4][6];
+>>>>>>> origin/master
 
 int main()
 {
@@ -25,12 +30,33 @@ int main()
     sf::Time gecenSure;
 
     srand(time(0));
+<<<<<<< HEAD
     
     sf::RenderWindow window(sf::VideoMode(_width, _height), "Breakout! If you can haha");
 
     
 
     resetLevel();
+=======
+    cerceve* c = new cerceve();
+    player* p = new player();
+    sf::RenderWindow window(sf::VideoMode(_width, _height), "ilk Program");
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
+
+    int brick_x;
+    int brick_y = 50;
+    for (int i = 0; i < 4; i++)
+    {
+        brick_x = 36;
+        for (int j = 0; j < 6; j++) {
+            int rand_uret = rand() % 5;
+            brickList[i][j] = brick(rand_uret, 0, brick_x, brick_y);
+            brick_x += round((232 * 0.3f) + 1);
+        }
+        brick_y += round((104 * 0.3f) + 1);
+    }
+>>>>>>> origin/master
 
     while (window.isOpen())
     {
