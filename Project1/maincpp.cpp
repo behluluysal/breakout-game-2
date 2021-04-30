@@ -7,6 +7,17 @@ float _width = 623.8f;
 float _height = 899.8f;
 float cerceveSuresi = 1.0f / 60.0f;
 
+cerceve* c;
+player* p;
+bool _isGameNotStarted;
+bool _isGameFinished;
+void resetLevel()
+{
+    c = new cerceve();
+    p = new player();
+    _isGameNotStarted = true;
+    _isGameFinished = false;
+}
 
 int main()
 {
@@ -14,11 +25,13 @@ int main()
     sf::Time gecenSure;
 
     srand(time(0));
-    cerceve* c = new cerceve();
-    player* p = new player();
-    sf::RenderWindow window(sf::VideoMode(_width, _height), "ilk Program");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    
+    sf::RenderWindow window(sf::VideoMode(_width, _height), "Breakout! If you can haha");
+
+    
+
+    resetLevel();
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -26,18 +39,23 @@ int main()
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
-            //start = true;
+            _isGameNotStarted = false;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            if (p->racketX < 460)
-                p->racketX += 1;
+            p->playerMoveR(_isGameNotStarted);
+            
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            if (p->racketX > 40)
-                p->racketX -= 1;
+            p->playerMoveL(_isGameNotStarted);
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+        {
+            if(_isGameFinished == true)
+                resetLevel();
+        }
+
 
         while (window.pollEvent(event))
         {
@@ -45,17 +63,14 @@ int main()
                 window.close();
         }
 
-        gecenSure += saat.restart();
-        
 
+
+        gecenSure += saat.restart();
         if (gecenSure.asSeconds() >= cerceveSuresi)
         {
-            p->racket.setPosition(p->racketX, p->racketY);
-
-
             window.clear();
-            window.draw(shape);
             window.draw(p->racket);
+            window.draw(p->ball);
             for (int i = 0; i < 26;)
             {
                 window.draw(c->verticalWalls[0][i]);

@@ -6,7 +6,13 @@ public:
 	sf::Sprite racket; //raket width 120,38, height 26,52
 	float racketX;
 	float racketY;
+
+	sf::Sprite ball;
+	float ballX = (((465 * 0.2f) - (371 * 0.05f)) / 2) + 203;
+	float ballY = 655 - (371 * 0.05f);
+
 	sf::Texture racketTextures[5];
+	sf::Texture ballTextures[6];
 
 	player()
 	{
@@ -17,9 +23,49 @@ public:
 		racketTextures[2].loadFromFile("resimler/Bats/bat_orange.png", { 22, 176, 463, 102 });
 		racketTextures[3].loadFromFile("resimler/Bats/bat_pink.png", { 22, 176, 463, 102 });
 		racketTextures[4].loadFromFile("resimler/Bats/bat_yellow.png", { 22, 176, 463, 102 });
+		
+		ballTextures[0].loadFromFile("resimler/Balls/ball_blue.png", { 68, 68, 371, 371 });
+		ballTextures[1].loadFromFile("resimler/Balls/ball_green.png", { 68, 68, 371, 371 });
+		ballTextures[2].loadFromFile("resimler/Balls/ball_orange.png", { 68, 68, 371, 371 });
+		ballTextures[3].loadFromFile("resimler/Balls/ball_red.png", { 68, 68, 371, 371 });
+		ballTextures[4].loadFromFile("resimler/Balls/ball_silver.png", { 68, 68, 371, 371 });
+		ballTextures[5].loadFromFile("resimler/Balls/ball_yellow.png", { 68, 68, 371, 371 });
+		
 		racket.setTexture(racketTextures[rand() % 5]);
 		racket.setScale(0.26f, 0.26f);
 		racket.setPosition(racketX, racketY);
+
+		ballX = ( ((120.38f- (371 * 0.07f)) /2)+ 251.71f);
+		ballY = racketY - (371 * 0.07f);
+		ball.setTexture(ballTextures[rand() % 6]);
+		ball.setScale(0.07f, 0.07f);
+		ball.setPosition(ballX, ballY);
+	}
+
+	void playerMoveR(bool x)
+	{
+		if (racketX < 460) {
+			racketX += 1;
+			if (x == true)
+			{
+				ballX += 1;
+			}
+			racket.setPosition(racketX, racketY);
+			ball.setPosition(ballX, ballY);
+		}
+	}
+	void playerMoveL(bool x)
+	{
+		if (racketX > 40){
+			racketX -= 1;
+			if (x == true)
+			{
+				ballX -= 1;
+			}
+			racket.setPosition(racketX, racketY);
+			ball.setPosition(ballX, ballY);
+		}
+			
 	}
 };
 
