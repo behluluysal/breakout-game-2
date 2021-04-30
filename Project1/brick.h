@@ -11,6 +11,11 @@ private:
 	int status; // 0: Saðlam  1: Kýrýlmýþ  2: Yok edilmiþ
 
 public:
+	brick() {
+		type = 0;
+		status = 0;
+	}
+
 	brick(int type, int status, int x, int y) {
 		type = 0;
 		status = 0;
