@@ -67,5 +67,9 @@ public:
 		}
 			
 	}
+
+	bool ballController() {
+
+	}
 };
 

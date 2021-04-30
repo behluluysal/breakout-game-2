@@ -1,34 +1,23 @@
 #pragma once
 #include <SFML/Graphics/Sprite.hpp>
 
-sf::Texture brickTextures[5];
-sf::Texture brickBrokenTextures[5];
+
 
 class brick
 {
-
-private:
-
-	sf::Sprite sprite;
-
-protected:
-
-
 public:
-
-	int type;
-	int status; // 0: Saðlam  1: Kýrýlmýþ  2: Yok edilmiþ
-
+	struct Brick {
+		sf::Sprite item;
+		int index;
+		bool broken;
+		bool destroyed;
+	};
+	sf::Texture brickTextures[5];
+	sf::Texture brickBrokenTextures[5];
+	struct Brick bricks[4][6];
 
 
 	brick() {
-		type = 0;
-		status = 0;
-	}
-
-	brick(int type, int status, int x, int y) {
-		this->type = type;
-		this->status = status;
 		brickTextures[0].loadFromFile("resimler/Bricks/brick_blue_small.png", { 140, 177, 233, 104 });
 		brickTextures[1].loadFromFile("resimler/Bricks/brick_green_small.png", { 140, 177, 233, 104 });
 		brickTextures[2].loadFromFile("resimler/Bricks/brick_pink_small.png", { 140, 177, 233, 104 });
@@ -41,28 +30,22 @@ public:
 		brickBrokenTextures[3].loadFromFile("resimler/Bricks/brick_violet_small_cracked.png", { 140, 177, 233, 104 });
 		brickBrokenTextures[4].loadFromFile("resimler/Bricks/brick_yellow_small_cracked.png", { 140, 177, 233, 104 });
 	
-		sprite.setTexture(brickTextures[type]);
-		sprite.setScale(0.3f, 0.3f);
-		sprite.setPosition(x, y);
-	}
-
-	void setType(int type) {
-		this->type = type;
-	}
-
-	int getType() {
-		return type;
-	}
-
-	void setStatus(int status) {
-		this->status = status;
-	}
-
-	int getStatus() {
-		return status;
-	}
-	sf::Sprite getSprite() {
-		return sprite;
+		int brickX = 36, brickY = 50;
+		for (int i = 0; i < 4; ++i)
+		{
+			brickX = 36;
+			for (int j = 0; j < 6; ++j) {
+				int random = rand() % 5;
+				bricks[i][j].index = random;
+				bricks[i][j].broken = false;
+				bricks[i][j].destroyed = false;
+				bricks[i][j].item.setTexture(brickTextures[random]);
+				bricks[i][j].item.setScale(0.3f, 0.3f);
+				bricks[i][j].item.setPosition(brickX, brickY);
+				brickX += round((232 * 0.3f) + 1);
+			}
+			brickY += round((104 * 0.3f) + 1);
+		}
 	}
 };
 
