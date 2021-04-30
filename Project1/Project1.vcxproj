@@ -151,8 +151,8 @@
     <ClCompile Include="maincpp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="brick.h" />
     <ClInclude Include="cerceve.h" />
-    <ClInclude Include="player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

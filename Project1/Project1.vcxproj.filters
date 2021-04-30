@@ -23,7 +23,7 @@
     <ClInclude Include="cerceve.h">
       <Filter>Üst Bilgi Dosyaları</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
+    <ClInclude Include="brick.h">
       <Filter>Üst Bilgi Dosyaları</Filter>
     </ClInclude>
   </ItemGroup>
