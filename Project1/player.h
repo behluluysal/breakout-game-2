@@ -45,7 +45,7 @@ public:
 	void playerMoveR(bool x)
 	{
 		if (raket_x < 460) {
-			raket_x += 8;
+			raket_x += 5;
 			if (x == true)
 			{
 				ball_x += 5;
@@ -56,7 +56,7 @@ public:
 	void playerMoveL(bool x)
 	{
 		if (raket_x > 40){
-			raket_x -= 8;
+			raket_x -= 5;
 			if (x == true)
 			{
 				ball_x -= 5;
